@@ -1,0 +1,32 @@
+{% load static %}
+
+<html>
+<head>
+  <title>Details car page</title>
+  <link rel="stylesheet" type="text/css" href="{% static '/register.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static '/register.css' %}" />
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+<body style="background: grey;">
+  <div style="height: 575px; width: 35%; border: 5px; " class="container">
+<font align="center">
+  {% for u in user %}<br> <br>
+    <h3>Nome: {{ u.first_name }}</h3><br><hr>
+    <h3>Cognome: {{ u.last_name }}</h3><br><hr>
+    <h3>Username: {{ u.username }}</h3><br><hr>
+    <h3>Email: {{ u.email }}</h3><br><hr>
+  {% endfor %}
+</font>
+
+</div>
+<div class="wrapper" align="center" style="background: grey;">
+
+<span class="group-btn">
+    <button class="btn btn-success" align="c"><a href="{%url 'index' %}" style="color: white;">Back to Homepage</a></button>
+</span>
+</div>
+</body>
+</html>

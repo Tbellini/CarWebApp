@@ -1,0 +1,62 @@
+{% load static %}
+
+<html>
+<head>
+  <title>Details car page</title>
+  <link rel="stylesheet" type="text/css" href="{% static '/register.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static '/register.css' %}" />
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div>
+  <span class="group-btn">
+      <button class="btn btn-success" align="c"><a href="{%url 'index' %}" style="color: white;">Back to Homepage</a></button>
+  </span>
+
+</div>
+
+
+
+<div style="height: 300px; border: 5px;">
+<h2><b>Veicolo</b></h2>
+<font>
+{% for car in cars %}
+<h3>Modello: {{ car.model }}</h3>
+<h3>Targa: {{ car.licenseplate }}</h3>
+<h3>Porte: {{ car.doors }}</h3>
+<h3>Posti: {{ car.seats }}</h3>
+</font>
+</div><br>
+<div style="height: 575px; float: left; width: 35%; border: 5px;">
+  <h2><b>Lista prenotazioni veicolo</b></h2>
+
+<font>  {% for carbooked in carsbooked %}
+    <h3>{{ carbooked.username }} da {{ carbooked.frombooked }} a {{ carbooked.tobooked }}</h3>
+  {% endfor %}
+</font>
+
+</div>
+<div style="height: 575px; float: right; width: 63.5%; border: 5px;">
+  <h2><b>Prenota veicolo  </b></h2>
+  <form action="{% url 'details' id=car.id %}" method="post">
+    {% csrf_token %}
+    <b>  {{ form.as_p }} <b>
+      <br><input type="submit" value="Prenota">
+
+
+      {% if messages %}
+         {% for message in messages %}
+             {{ message }}
+         {% endfor %}
+      {% endif %}
+
+  </form>
+
+</div>
+{% endfor %}
+
+</body>
+</html>

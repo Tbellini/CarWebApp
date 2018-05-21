@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Login page</title>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+<body>
+  <div class="container">
+      <div class="row">
+          <div class="col-md-offset-5 col-md-3">
+  <h1>Login page</h1>
+
+<form action="{% url 'login' %}" method="POST" >
+       {% csrf_token %}
+       <p>
+           <label>Username</label>
+           <input type="text" name="username" class="form-control input-sm chat-input">
+       </p>
+       <p>
+           <label>Password</label>
+           <input type="password" name="password" class="form-control input-sm chat-input">
+       </p>
+       <h5><a href="{% url 'register' %}">New user? Go to registration page!</a></h5>
+       <div class="wrapper">
+            <span class="group-btn">
+                <button class="btn btn-primary btn-md">Login <i class="fa fa-sign-in"></i></button>
+            </span>
+      </div><br>
+      {% for message in messages %}
+      <li class="alert alert-danger">{{ message }}</li>
+      {% endfor %}
+   </form>
+
+    </div>
+</div>
+</div>
+</body>
+</html>

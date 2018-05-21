@@ -1,0 +1,41 @@
+{% load static %}
+
+<html>
+<head>
+  <title>Booking page</title>
+  <link rel="stylesheet" type="text/css" href="{% static '/register.css' %}" />
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div>
+
+<span><h1 style="background: yellow; text-align: center;">Book your car! </h1>
+  <h3 style="text-align:center;"><font><b>Welcome: {{ utente }}</b></font></h3>
+  {% if utente is None %}
+  <span><a href="{% url 'login' %}">Login</a></span>
+  {% else %}
+  <h4 style="text-align:center; background:black;">
+    <a href="{% url 'aboutme' %}">About Me</a>&nbsp&nbsp&nbsp
+    <a href="{% url 'logout' %}">Logout</a></h4>
+  {% endif %}
+</span>
+
+</div>
+<div style="height: 300px; border: 5px;">
+<h2><font>Lista tue prenotazioni</font></h2>
+{% for carbooked in carsbooked %}
+  <h3><a href="{% url 'bookedbyme' id=carbooked.id %}">{{ carbooked.model }}</a></h3>
+{% endfor %}
+</div>
+
+<div style="height: 450px; border: 5px;">
+<h2 ><font color="white">Lista veicoli disponibili</font></h2>
+    {% for car in cars %}
+    <h3><a href="{% url 'details' id=car.id %}">{{ car.model }}</a></h3>
+    {% endfor %}
+</div>
+</body>
+</html>

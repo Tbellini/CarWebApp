@@ -1,0 +1,38 @@
+@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
+
+
+h2{
+  text-color: purple;
+
+}
+div{
+  background: black;
+
+
+}
+font{
+  color: white;
+}
+.hr-success{
+  background-image: -webkit-linear-gradient(left, rgba(15,157,88,.8), rgba(15, 157, 88,.6), rgba(0,0,0,0));
+}
+.container{
+  width: 200px;
+  height: 200px;
+  background: black;
+
+  margin: 0 auto;
+
+}
+.flex-container{
+display: -webkit-flex;
+display: -moz-flex;
+display: flex;
+-webkit-justify-content: space-between;
+-moz-justify-content: space-between;
+justify-content: space-between;
+width: 800px;
+height: 200px;
+background-color:lightgrey;
+margin:30px auto;
+}
