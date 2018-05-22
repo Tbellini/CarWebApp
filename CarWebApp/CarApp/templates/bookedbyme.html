@@ -13,21 +13,43 @@
 <body style="background: grey;">
   <div style="height: 575px; width: 35%; border: 5px;" class="container">
 <font align="center">
-  {% for carbooked in carsbooked %}<br><br><hr>
-    <h3>Veicolo: {{ carbooked.model }}</h3><br><hr>
-    <h3>Inizio: {{ carbooked.frombooked }}</h3><br><hr>
-    <h3>Fine: {{ carbooked.tobooked }}</h3><br><hr>
-    <h3>Luogo: {{ carbooked.place }}</h3><br><hr>
+  {% for carbooked in carsbooked %}<hr>
+    <h3><b>Veicolo:</b> {{ carbooked.model }}</h3><br><hr>
+    <h3><b>Inizio:</b> {{ carbooked.frombooked }}</h3><br><hr>
+    <h3><b>Fine:</b> {{ carbooked.tobooked }}</h3><br><hr>
+    <h3><b>Luogo:</b> {{ carbooked.place }}</h3><br><hr>
+    <h3><b>Note:</b> {{ carbooked.note }}</h3><br><hr>
 
 
 
   {% endfor %}
 </font>
-</div>
-<div class="wrapper" align="center" style="background: grey;">
+<div class="wrapper"   style="background: black; float:left">
 
 <span class="group-btn">
-    <button class="btn btn-success" align="c"><a href="{%url 'index' %}" style="color: white;">Back to Homepage</a></button>
+  {% for carbooked in carsbooked %}
+  <input type="button" class="btn btn-danger" onclick="location.href='{% url 'deletebook' id=carbooked.id%}';" value="Delete"/></span>
+
+  {% endfor %}
+</span>
+</div>
+<div class="wrapper" align="right" style="background: black; ">
+
+<span class="group-btn">
+  {% for carbooked in carsbooked %}
+  <input type="button" class="btn btn-info" onclick="location.href='{% url 'modifybook' id=carbooked.id%}';" value="Modify"/></span>
+
+  {% endfor %}
+</span>
+</div>
+
+
+</div>
+<div class="wrapper" align="center" style="background: grey; ">
+
+<span class="group-btn" style=" width: 20em;  height: 2em;">
+    <input  type="button" class="btn btn-success" onclick="location.href='{% url 'index' %}';" value="Back to Homepage"/></span>
+
 </span>
 </div>
 </body>

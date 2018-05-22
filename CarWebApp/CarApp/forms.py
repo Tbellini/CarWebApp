@@ -32,21 +32,21 @@ class LoginForm(forms.ModelForm):
         'password': forms.PasswordInput(),
         }
 
-    # class Meta:
-    #
-    #     model = User
-    #
-    #     fields=('username','password')
-    #     widgets = {
-    #     'password': forms.PasswordInput(),
-    #     }
 
 
 class BookForm(forms.ModelForm):
+    note=forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Aggiungi note..'}))
+    place=forms.CharField(label="Dove?",widget=forms.TextInput(attrs={'placeholder': 'Aggiungi luogo..'}))
     class Meta:
         model = CarBooked
 
         fields=('frombooked','tobooked','place','note')
-        #bookfrom = forms.DateField(label='Da:',widget=forms.SelectDateWidget(),  initial=datetime.date.today())
-        #bookto = forms.DateField(label='a:',widget=forms.SelectDateWidget(),  initial=datetime.date.today())
-        #note = forms.CharField(widget=forms.Textarea)
+
+
+class modifybookForm(forms.ModelForm):
+    note=forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Aggiungi note..'}))
+    place=forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Aggiungi luogo..'}))
+    class Meta:
+        model = CarBooked
+
+        fields=('frombooked','tobooked','place','note')

@@ -37,6 +37,11 @@
       <label>Password</label>
       <input type="password" name="password" class="form-control input-sm chat-input">
   </p>
+  <p>
+      <label>Repeat Password</label>
+      <input type="password" name="password2" class="form-control input-sm chat-input">
+  </p>
+
   <div class="wrapper" align="center">
        <span class="group-btn">
            <button class="btn btn-primary btn-md">Sign Up <i class="fa fa-sign-in"></i></button>
@@ -46,6 +51,7 @@
  </div><br>
  {% for message in messages %}
  <li class="alert {{ message.tags }}">{{ message }}</li>
+
  {% endfor %}
 
  <hr class="hr-success">

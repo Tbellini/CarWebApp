@@ -11,21 +11,27 @@
 
 </head>
 <body style="background: grey;">
-  <div style="height: 575px; width: 35%; border: 5px; " class="container">
-<font align="center">
-  {% for u in user %}<br> <br>
-    <h3>Nome: {{ u.first_name }}</h3><br><hr>
-    <h3>Cognome: {{ u.last_name }}</h3><br><hr>
-    <h3>Username: {{ u.username }}</h3><br><hr>
-    <h3>Email: {{ u.email }}</h3><br><hr>
-  {% endfor %}
-</font>
+  <div style="height: 575px; width: 35%; border: 5px;" class="container">
+  <h2><b>Modifica Prenotazione: </b></h2>
+  {% for carbooked in carsbooked %}
+  <form action="{% url 'modifybook' id=carbooked.id %}" method="post">
+    {% csrf_token %}
+    <b>  {{ form.as_p }} <b>
 
+<div class="wrapper" align="center" style="background: black;">
+
+<span class="group-btn">
+
+  <br><input class="btn btn-danger" type="submit" value="Save">
+</span>
 </div>
+</div>
+</form>
+{% endfor %}
 <div class="wrapper" align="center" style="background: grey;">
 
 <span class="group-btn">
-  <input type="button" class="btn btn-success" onclick="location.href='{% url 'index' %}';" value="Back to Homepage"/></span>
+      <input type="button" class="btn btn-success" onclick="location.href='{% url 'index' %}';" value="Back to Homepage"/></span>
 </span>
 </div>
 </body>

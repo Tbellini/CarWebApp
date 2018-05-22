@@ -22,7 +22,7 @@ class CarBooked(models.Model):
     frombooked = models.DateField(verbose_name=u"Da",default=date.today)
     tobooked = models.DateField(verbose_name=u"a",default=date.today)
     place = models.CharField(verbose_name=u"Dove?", max_length=30)
-    note = models.TextField(default="Aggiungi note..")
+    note = models.TextField(default=None)
 
     username = models.ForeignKey(User,default=1,on_delete=models.CASCADE)
     model = models.ForeignKey(Car,on_delete=models.CASCADE)

@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect,reverse
-from .forms import RegisterForm,LoginForm, BookForm
+from .forms import RegisterForm,LoginForm, BookForm, modifybookForm
 from .models import User, Car, CarBooked
 from django.contrib import messages
 from passlib.hash import pbkdf2_sha256
 from django.contrib.auth import authenticate, login as logg, logout as loggout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from datetime import date
+from django.db.models import F
 
 @login_required
 def details(request,id):
@@ -26,12 +28,16 @@ def details(request,id):
 
             user=User.objects.get(username=utente)
             print(user)
-            #print(u2)
-            if  CarBooked.objects.filter(frombooked=frombooked,tobooked=tobooked):
+
+
+            if  CarBooked.objects.filter(frombooked=frombooked) or CarBooked.objects.filter(tobooked=tobooked) and CarBooked.objects.filter(frombooked=tobooked) or CarBooked.objects.filter(tobooked=frombooked):
+
+                print("presente")
                 return HttpResponse("data già presente")
             else:
                 newbook=CarBooked(frombooked=frombooked, tobooked=tobooked,place=place,note=note,model=cars,username=user)
                 newbook.save()
+                print("Non ancora")
             return HttpResponseRedirect('index')
 
     else:
@@ -40,6 +46,55 @@ def details(request,id):
     print(id)
     carsbooked=CarBooked.objects.filter(model=id)
     return render(request,'detailscar.html',{'cars':cars,'carsbooked':carsbooked,'form':form})
+
+@login_required
+def modifybook(request,id):
+    if request.method == 'POST':
+
+        form = modifybookForm(request.POST)
+
+        if form.is_valid():
+
+            frombooked=form.cleaned_data['frombooked']
+            tobooked=form.cleaned_data['tobooked']
+            place=form.cleaned_data['place']
+            note=form.cleaned_data['note']
+
+            utente=request.user
+
+            user=User.objects.get(username=utente)
+            print(user)
+            #print(u2)
+
+            newbook=CarBooked.objects.get(id=id)
+            newbook.frombooked=frombooked
+            newbook.tobooked=tobooked
+            newbook.note=note
+            newbook.place=place
+            print("save")
+            newbook.save()
+            return redirect('bookedbyme',id=id)
+        else:
+            return HttpResponse('fuckk')
+
+    else:
+        carsbooked=CarBooked.objects.filter(id=id)
+        for carbooked in carsbooked:
+                carfromdate=carbooked.frombooked
+                print(carfromdate)
+                cartodate=carbooked.tobooked
+                carboplace=carbooked.place
+                carnote=carbooked.note
+
+        form = modifybookForm(initial={'frombooked':carfromdate,'tobooked':cartodate,'place':carboplace,'note':carnote})
+        print("ciooooooooooo")
+
+    return render(request,'modifybook.html',{'form':form,'carsbooked':carsbooked})
+
+def deletebook(request,id):
+    CarBooked.objects.filter(id=id).delete()
+
+    return redirect('index')
 
 @login_required
 def index(request):
@@ -66,13 +121,6 @@ def aboutme(request):
 
     return render(request, 'aboutme.html',{'user':user})
 
-def authss(username=None, password=None):
-    try:
-        user = User.objects.get(username=username)
-        if user.check_password(password):
-            return user
-    except User.DoesNotExist:
-        return None
 
 def login(request):
     if request.user.is_authenticated:
@@ -114,10 +162,16 @@ def register(request):
         if form.is_valid():
             username=form.cleaned_data['username']
             print(username)
-            user=form.save()
-            user.set_password(user.password)
-            user.save()
-            messages.success(request,'Congratulation! Now you are registered correctly.')
+            password=form.cleaned_data['password']
+            password2=request.POST['password2']
+            if password == password2:
+                user=form.save()
+                user.set_password(user.password)
+                user.save()
+                messages.success(request,'Congratulation! Now you are registered correctly.')
+            else:
+                messages.error(request, 'Password doesn\'t match')
+                return redirect('register')
         else:
             messages.error(request, 'This username is already used, choose another one')
             return redirect('register')

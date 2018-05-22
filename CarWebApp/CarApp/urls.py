@@ -3,6 +3,9 @@ from . import views
 urlpatterns =[
     url(r'index/', views.index, name='index'),
     url(r'details/(?P<id>[0-9]+)$', views.details, name='details'),
+    url(r'modify/(?P<id>[0-9]+)$', views.modifybook, name='modifybook'),
+    url(r'deletebook/(?P<id>[0-9]+)$', views.deletebook, name='deletebook'),
+
     url(r'register/', views.register, name='register'),
     url(r'^login/$', views.login, name='login'),
     url(r'logout/', views.logout, name='logout'),
