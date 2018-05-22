@@ -33,7 +33,8 @@ def details(request,id):
             if  CarBooked.objects.filter(frombooked=frombooked) or CarBooked.objects.filter(tobooked=tobooked) and CarBooked.objects.filter(frombooked=tobooked) or CarBooked.objects.filter(tobooked=frombooked):
 
                 print("presente")
-                return HttpResponse("data già presente")
+                messages.error(request,"In questa data c'è già una prenotazione :(")
+                return redirect('details',id)
             else:
                 newbook=CarBooked(frombooked=frombooked, tobooked=tobooked,place=place,note=note,model=cars,username=user)
                 newbook.save()

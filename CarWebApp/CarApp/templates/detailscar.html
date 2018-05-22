@@ -43,19 +43,25 @@
                       <br><input class="btn btn-warning" type="submit" value="Prenota">
 
 
-                      {% if messages %}
-                         {% for message in messages %}
-                             {{ message }}
-                         {% endfor %}
-                      {% endif %}
+
 
                   </form>
+
             </div>
             </div>
+
           </div>
 
+
 </div>
+{% if messages %}
+   {% for message in messages %}
+      <li class="alert alert-danger">{{ message }}</li>
+
+   {% endfor %}
+{% endif %}
 </div>
+
 </div>
 {% endfor %}
 <div style="height: 480px; float: left; width: 35%; border: 5px;"><br><br>
