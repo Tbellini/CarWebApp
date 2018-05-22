@@ -19,7 +19,7 @@
   {% csrf_token %}
   <p>
       <label>First name</label>
-      <input type="text" name="First_name" class="form-control input-sm chat-input">
+      <input type="text" name="first_name" class="form-control input-sm chat-input">
   </p>
   <p>
       <label>Last Name</label>
@@ -45,15 +45,16 @@
 
  </div><br>
  {% for message in messages %}
- <li class="alert alert-danger">{{ message }}</li>
+ <li class="alert {{ message.tags }}">{{ message }}</li>
  {% endfor %}
 
  <hr class="hr-success">
- <h4 align="center">Or</h4>
+ <h4 align="center"><i>Or</i></h4>
+ <hr class="hr-success">
+
  <div class="wrapper" align="center">
       <span class="group-btn">
-          <button class="btn btn-success"><a href="{%url 'login' %}" style="color: white;">Login</a></button>
-      </span>
+        <input type="button" class="btn btn-success" onclick="location.href='{% url 'login' %}';" value="Login"/></span>
 
 
 </div>

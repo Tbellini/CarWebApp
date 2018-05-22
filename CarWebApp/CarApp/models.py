@@ -14,7 +14,6 @@ class Car(models.Model):
     licenseplate=models.CharField(max_length=200) #targa
     doors=models.CharField(max_length=200) #portiere
     seats=models.CharField(max_length=200) #posti a sedere
-    booked=models.BooleanField(default=False)
 
     def __str__(self):
         return self.model

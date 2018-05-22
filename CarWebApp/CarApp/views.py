@@ -114,18 +114,13 @@ def register(request):
         if form.is_valid():
             username=form.cleaned_data['username']
             print(username)
-            user = User.objects.filter(username=username)
             user=form.save()
             user.set_password(user.password)
             user.save()
+            messages.success(request,'Congratulation! Now you are registered correctly.')
         else:
             messages.error(request, 'This username is already used, choose another one')
             return redirect('register')
-
-
-
-            return redirect('index')
-
     else:
         form = RegisterForm()
 
