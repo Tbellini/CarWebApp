@@ -76,7 +76,7 @@ def modifybook(request,id):
             newbook.save()
             return redirect('bookedbyme',id=id)
         else:
-            return HttpResponse('fuckk')
+            return HttpResponse('non valido')
 
     else:
         carsbooked=CarBooked.objects.filter(id=id)
