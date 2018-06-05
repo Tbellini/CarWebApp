@@ -29,6 +29,7 @@ def details(request,id):
             user=User.objects.get(username=utente)
             print(user)
 
+<<<<<<< HEAD
             carsbooked=CarBooked.objects.filter(model=id)
             print(carsbooked)
             print("lunghezzaa")
@@ -61,6 +62,14 @@ def details(request,id):
 
                 except:
                         print("pass2")
+=======
+
+            if  CarBooked.objects.filter(frombooked=frombooked) or CarBooked.objects.filter(tobooked=tobooked) and CarBooked.objects.filter(frombooked=tobooked) or CarBooked.objects.filter(tobooked=frombooked):
+
+                print("presente")
+                messages.error(request,"In questa data c'è già una prenotazione :(")
+                return redirect('details',id)
+>>>>>>> 2a6d1081cbda13ade28fe632210193865d964ee2
             else:
                 pass
 

@@ -40,6 +40,7 @@
                   <form action="{% url 'details' id=car.id %}" method="post">
                     {% csrf_token %}
                     <b>  {{ form.as_p }} <b>
+<<<<<<< HEAD
                       <br><input class="btn btn-warning" type="submit" value="Prenota">
 
 
@@ -47,6 +48,10 @@
 
                   </form>
 
+=======
+                      <br><input class="btn btn-warning" type="submit" value="Prenota"
+		</form>
+>>>>>>> 2a6d1081cbda13ade28fe632210193865d964ee2
             </div>
             </div>
 
@@ -54,11 +59,18 @@
 
 
 </div>
+<<<<<<< HEAD
 {% if messages %}
    {% for message in messages %}
       <li class="alert alert-danger">{{ message }}</li>
 
    {% endfor %}
+=======
+ {% if messages %}
+{% for message in messages %}
+    {{ message }}
+{% endfor %}
+>>>>>>> 2a6d1081cbda13ade28fe632210193865d964ee2
 {% endif %}
 </div>
 
