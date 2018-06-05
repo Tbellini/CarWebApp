@@ -30,7 +30,7 @@
 <h3>Posti: {{ car.seats }}</h3>
 </font>
 </div><br>
-<div style="height: 760px; float: right; width: 63.5%; border: 5px;">
+<div style="height: 830px; float: right; width: 63.5%; border: 5px;">
   <h2><b><font>Prenota veicolo </font> </b></h2>
   <div class="container" style="width: 50%;">
 	<div class="row" style="width: 50%;">
@@ -64,13 +64,13 @@
 
 </div>
 {% endfor %}
-<div style="height: 480px; float: left; width: 35%; border: 5px;"><br><br>
+<div style="height: 555px; float: left; width: 35%; border: 5px;"><br><br>
   <hr class="style18"><hr class="style18">
 
   <h2><b><font>Lista prenotazioni veicolo</font></b></h2>
 
 <font>  {% for carbooked in carsbooked %}
-    <h3>{{ carbooked.username }} da {{ carbooked.frombooked }} a {{ carbooked.tobooked }}</h3>
+    <h3>{{ carbooked.username.get }} da {{ carbooked.frombooked }} a {{ carbooked.tobooked }}</h3>
   {% endfor %}
 </font>
 

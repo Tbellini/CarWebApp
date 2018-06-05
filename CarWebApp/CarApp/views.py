@@ -29,23 +29,57 @@ def details(request,id):
             user=User.objects.get(username=utente)
             print(user)
 
+            carsbooked=CarBooked.objects.filter(model=id)
+            print(carsbooked)
+            print("lunghezzaa")
+            print(len(carsbooked))
+            if len(carsbooked) >0:
+                cont=0
+                try:
+                    carbookedid = CarBooked.objects.latest('id')
+                    print(carbookedid.id)
 
-            if  CarBooked.objects.filter(frombooked=frombooked) or CarBooked.objects.filter(tobooked=tobooked) and CarBooked.objects.filter(frombooked=tobooked) or CarBooked.objects.filter(tobooked=frombooked):
+                    last=carbookedid.id+1
+                    for i in range(1, last):
+                        try:
+                            print(i)
+                            s=CarBooked.objects.filter(model=id).get(id=i)
+                            print(s)
+                            print("valutaA")
+                            print(s.valuta(datainit=frombooked,datafine=tobooked))
+                            c=s.valuta(datainit=frombooked,datafine=tobooked)
+                            print("c:")
+                            print(c)
+                            if c == "In mezzo":
+                                cont=cont+1
+                                print("cont: ")
+                                print(cont)
+                                messages.error(request,"In questa data c'è già una prenotazione :(")
+                                return redirect('details',id)
+                        except:
+                            print("pass")
 
-                print("presente")
-                messages.error(request,"In questa data c'è già una prenotazione :(")
-                return redirect('details',id)
+                except:
+                        print("pass2")
             else:
-                newbook=CarBooked(frombooked=frombooked, tobooked=tobooked,place=place,note=note,model=cars,username=user)
-                newbook.save()
-                print("Non ancora")
+                pass
+
+            newbook=CarBooked(frombooked=frombooked, tobooked=tobooked,place=place,note=note,model=cars)
+            newbook.save()
+            newbook.username.add(user)
+            print("Non ancora")
+            print(newbook.id)
             return HttpResponseRedirect('index')
 
     else:
         form = BookForm()
+
+
     cars=Car.objects.filter(id=id)
     print(id)
     carsbooked=CarBooked.objects.filter(model=id)
+    print("username preno: %s"%carsbooked)
+
     return render(request,'detailscar.html',{'cars':cars,'carsbooked':carsbooked,'form':form})
 
 @login_required

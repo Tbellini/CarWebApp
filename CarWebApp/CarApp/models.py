@@ -24,5 +24,15 @@ class CarBooked(models.Model):
     place = models.CharField(verbose_name=u"Dove?", max_length=30)
     note = models.TextField(default=None)
 
-    username = models.ForeignKey(User,default=1,on_delete=models.CASCADE)
+    username = models.ManyToManyField(User)
     model = models.ForeignKey(Car,on_delete=models.CASCADE)
+
+    def valuta(self, datainit,datafine):
+
+        import datetime
+        if self.frombooked <= datainit <= self.tobooked:
+            print(datainit)
+            return "In mezzo"
+        else:
+            print(datainit)
+            return "fuori"
